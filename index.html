@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Read and parse CSV file</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script src="readCSVfile.js"></script>
+    <style>
+      .marginLeft {
+        margin-left: 2rem;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <h2 class="marginLeft">Code-snippet generator for calculating Student Absences.</h2>
+    <label class="marginLeft" for="myfile">Select an Excel file:</label>
+    <input class="marginLeft" type="file" id="myfile" name="myfile"><br/>
+    <button style="position: absolute;top:100px;left:50px" onclick="parseFile()" >parse file</button>
+    <button id="clipboardBtn" style="visibility: hidden;position: absolute;top:100px;left:200px;" onclick="copyToClipboard()" >Copy to Clipboard</button>
+    <textarea style="position:absolute;top: 140px; left: 50px;color:lightgreen; background-color: black"
+        id="textArea" rows="30" cols="100"></textarea>
+  </body>
+</html>
