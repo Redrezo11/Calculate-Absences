@@ -162,7 +162,6 @@ function parseFile() {
     }
     output += ']'
     textArea.innerHTML = baseCode(output);
-    console.log(baseCode(output));
 
 
   });
