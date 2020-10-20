@@ -15,13 +15,39 @@
 
   <body>
 
-    <h2 class="marginLeft">Code-snippet generator for calculating Student Absences.</h2>
+    <h2 class="marginLeft">Code-snippet generator for calculating Student Absences. <a style="color:red" href="instructions.html">Click here for instructions.</a></h2>
     <label class="marginLeft" for="myfile">Select an Excel file:</label>
-    <input class="marginLeft" type="file" id="myfile" name="myfile"><br/>
+    <input class="marginLeft" type="file" id="myfile" name="myfile">
+
+    <label  for="startTime">Start-time:</label>
+    <select  name="startTime" id="startTime" onchange="selectTime(event)">
+      <option value="8:00">8:00am</option>
+      <option value="9:00">9:00am</option>
+      <option value="10:00">10:00am</option>
+      <option value="11:00">11:00am</option>
+      <option value="12:00">12:00pm</option>
+      <option value="13:00">1:00pm</option>
+      <option value="14:00">2:00pm</option>
+      <option value="15:00">3:00pm</option>
+      <option value="16:00">4:00pm</option>
+    </select>
+
+    <label  class="marginLeft" for="sessionTime">Session duration:</label>
+    <select  name="sessionTime" id="sessionTime" onchange="selectSession(event)">
+      <option value="01:00">4 hours</option>
+      <option value="00:45" selected="selected">3 hours</option>
+      <option value="00:30">2 hours</option>
+    </select>
+
+    <br/>
+
+
+
     <button style="position: absolute;top:100px;left:50px" onclick="parseFile()" >parse file</button>
     <button id="clipboardBtn" style="visibility: hidden;position: absolute;top:100px;left:200px;" onclick="copyToClipboard()" >Copy to Clipboard</button>
     <textarea style="position:absolute;top: 140px; left: 50px;color:lightgreen; background-color: black"
         id="textArea" rows="30" cols="100"></textarea>
+    <a href="T5form.html" style="position:absolute;bottom: 80px; left: 50px;">code for T5 form</a>
   </body>
 
 </html>

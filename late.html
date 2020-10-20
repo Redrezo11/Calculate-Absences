@@ -1,0 +1,31 @@
+
+<!--the parent element a <td></td> contains the time of the first join -->
+<!--the parent of the parent element a <tr></tr> contains the entire object. -->
+<span ng-if="!attendee.detailRecord" class="inline-column-title ng-scope" bb-translate="" analytics-id="attendance.attendees.column.first-join">First join</span>
+
+
+<!--time duration , embedded in 6th td element-->
+<bb-time-duration time-in-secs="attendee.totalActive" class="ng-isolate-scope">03:23:38</bb-time-duration>
+
+<!--- title of the report, parent element is H1 --->
+<bdi>الفصل الافتراضي_278_ECE001</bdi>
+
+<!--- date of the report -->
+<h3 class="session-time-frame ng-scope" ng-if="attendeesPrintable.listReady">
+        Sunday, September 6, 2020
+        10:47 AM
+        <span>—</span>
+        <!-- ngIf: attendeesPrintable.multipleDays -->
+        2:13 PM
+</h3>
+
+only works if you convert PM to standard 24 hours.
+
+
+var str1 = "10:20:45",
+    str2 = "05:10:10";
+
+if (str1 > str2)
+    alert("Time 1 is later than time 2");
+else
+    alert("Time 2 is later than time 1");

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>T5 form code</title>
+    <script src="T5code.js"></script>
+    <style>
+      .marginLeft {
+        margin-left: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 class="marginLeft">T5 Form code-snippet</h2>
+    <p class="marginLeft" style="width:1000px">To use this code snippet follow the same <a href="instructions.html">instructions</a> for running the code snippet, but this time run the code snippet over your "previous semester marks" page on MYUT for your selected class.
+    It should look something like <a href="images/T5image.png">this</a></p>
+      <button id="clipboardBtn" style="position: absolute;top:140px;left:100px;" onclick="copyToClipboard()" >Copy to Clipboard</button>
+    <textarea style="position:absolute;top: 180px; left: 50px;color:lightgreen; background-color: black"
+        id="textArea" rows="30" cols="100">{//block scope
+
+let documents = document.querySelectorAll("span");
+let studentGrades = [];
+
+let withdrawn=0;
+
+
+let grades = {
+    aPlus: {counter: 0, percentage: null},
+    a: {counter: 0, percentage: null},
+    bPlus:{counter: 0, percentage: null},
+    b:{counter: 0, percentage: null},
+    cPlus:{counter: 0, percentage: null},
+    c:{counter: 0, percentage: null},
+    dPlus:{counter: 0, percentage: null},
+    d:{counter: 0, percentage: null},
+    f:{counter: 0, percentage: null}
+}
+
+//filter  for "gradeMarkHid" in ID, of input element. substring( id.length-7,id.length)
+//id: myForm:students:29:gradeMarkHid
+
+ for (let i=0; i<documents.length;i++) {
+     let document = documents[i];
+     let documentId  = documents[i].id;
+     let id = documentId.substring(documentId.length - 9, documentId.length);
+     if(id==='gradeMark') {
+         studentGrades.push(document.innerHTML);
+     }
+}
+let numOfStudents = studentGrades.length;
+// console.log(studentGrades);
+
+// console.log(gradeList.aPlus.counter);
+for(grade of studentGrades) {
+
+    // if(grade==='W') withdrawn +=1;
+    switch (grade) {
+        case 'A+':
+             grades.aPlus.counter += 1;
+             break;
+        case 'A':
+            grades.a.counter += 1;
+            break;
+        case 'B+':
+            grades.bPlus.counter += 1;
+            break;
+        case 'B':
+            grades.b.counter += 1;
+            break;
+        case 'C+':
+            grades.cPlus.counter += 1;
+            break;
+        case 'C':
+            grades.c.counter += 1;
+            break;
+        case 'D':
+            grades.d.counter +=1;
+            break;
+        case 'D+':
+            grades.dPlus.counter += 1;
+            break;
+        case 'NF':
+            grades.f.counter +=1;
+            break;
+        case 'NP':
+            grades.f.counter +=1;
+            break;
+        case 'W':
+            withdrawn+=1;
+            break;
+        default:
+            break;
+    }
+}
+
+for (grade of studentGrades) {
+    let numOfStudents = studentGrades.length;
+    switch(grade) {
+     case 'A+':
+            grades.aPlus.percentage = (grades.aPlus.counter/numOfStudents)*100;
+             break;
+     case 'A':
+            grades.a.percentage = (grades.a.counter/numOfStudents)*100;
+            break;
+     case 'B+':
+            grades.bPlus.percentage = (grades.bPlus.counter/numOfStudents)*100;
+            break;
+     case 'B':
+            grades.b.percentage = (grades.b.counter/numOfStudents)*100;
+            break;
+     case 'C+':
+            grades.cPlus.percentage = (grades.cPlus.counter/numOfStudents)*100;
+            break;
+     case 'C':
+            grades.c.percentage = (grades.c.counter/numOfStudents)*100;
+            break;
+     case 'D+':
+            grades.dPlus.percentage = (grades.dPlus.counter/numOfStudents)*100;
+            break;
+     case 'D':
+            grades.d.percentage = (grades.d.counter/numOfStudents)*100;
+            break;
+      default:
+            break;
+    }
+}
+
+let withdrawnPercentage = (withdrawn/numOfStudents)*100;
+grades.f.percentage = (grades.f.counter/numOfStudents)*100;
+let failPercentage = grades.f.percentage;
+let fail= grades.f.counter;
+let pass=numOfStudents - fail;
+let passPercentage = 100 - failPercentage;
+console.log(`number of students: ${studentGrades.length}`);
+console.log(`Passed: ${pass} students, ${passPercentage}%. Failed: ${fail} students, ${failPercentage}%`);
+console.log(`withdrawn ${withdrawn} students, ${withdrawnPercentage}%`);
+console.log(`number of A+: ${grades.aPlus.counter}, percentage: ${grades.aPlus.percentage}`);
+console.log(`number of A's: ${grades.a.counter}, percentage: ${grades.a.percentage}`);
+console.log(`number of B+: ${grades.bPlus.counter}, percentage: ${grades.bPlus.percentage}`);
+console.log(`number of B's: ${grades.b.counter}, percentage: ${grades.b.percentage}`);
+console.log(`number of C+: ${grades.cPlus.counter}, percentage: ${grades.cPlus.percentage}`);
+console.log(`number of C: ${grades.c.counter}, percentage: ${grades.c.percentage}`);
+console.log(`number of D+: ${grades.dPlus.counter}, percentage: ${grades.dPlus.percentage}`);
+console.log(`number of D: ${grades.d.counter}, percentage: ${grades.d.percentage}`);
+console.log(`number of F (includes NF/NP): ${grades.f.counter}, percentage: ${grades.f.percentage}`);
+
+}
+</textarea>
+  </body>
+</html>
