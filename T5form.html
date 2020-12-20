@@ -14,8 +14,9 @@
     <h2 class="marginLeft">T5 Form code-snippet</h2>
     <p class="marginLeft" style="width:1000px">To use this code snippet follow the same <a href="instructions.html">instructions</a> for running the code snippet, but this time run the code snippet over your "previous semester marks" page on MYUT for your selected class.
     It should look something like <a href="images/T5image.png">this</a></p>
-      <button id="clipboardBtn" style="position: absolute;top:140px;left:100px;" onclick="copyToClipboard()" >Copy to Clipboard</button>
-    <textarea style="position:absolute;top: 180px; left: 50px;color:lightgreen; background-color: black"
+    <p class="marginLeft" style="width:1000px">note: NF and NP are separate entities, they both factor in as "Failure" in overall calculations of PASS / FAIL if this changes you can run your own separate calculations.</p>
+      <button id="clipboardBtn" style="position: absolute;top:200px;left:100px;" onclick="copyToClipboard()" >Copy to Clipboard</button>
+    <textarea style="position:absolute;top: 240px; left: 50px;color:lightgreen; background-color: black"
         id="textArea" rows="30" cols="100">{//block scope
 
 let documents = document.querySelectorAll("span");
@@ -33,7 +34,9 @@ let grades = {
     c:{counter: 0, percentage: null},
     dPlus:{counter: 0, percentage: null},
     d:{counter: 0, percentage: null},
-    f:{counter: 0, percentage: null}
+    nf:{counter: 0, percentage: null},
+    np:{counter: 0, percentage: null},
+    w:{counter:0, percentage:null}
 }
 
 //filter  for "gradeMarkHid" in ID, of input element. substring( id.length-7,id.length)
@@ -80,71 +83,53 @@ for(grade of studentGrades) {
             grades.dPlus.counter += 1;
             break;
         case 'NF':
-            grades.f.counter +=1;
+            grades.nf.counter +=1;
             break;
         case 'NP':
-            grades.f.counter +=1;
+            grades.np.counter +=1;
             break;
         case 'W':
-            withdrawn+=1;
+            grades.w.counter +=1;
             break;
         default:
             break;
     }
 }
 
-for (grade of studentGrades) {
-    let numOfStudents = studentGrades.length;
-    switch(grade) {
-     case 'A+':
-            grades.aPlus.percentage = (grades.aPlus.counter/numOfStudents)*100;
-             break;
-     case 'A':
-            grades.a.percentage = (grades.a.counter/numOfStudents)*100;
-            break;
-     case 'B+':
-            grades.bPlus.percentage = (grades.bPlus.counter/numOfStudents)*100;
-            break;
-     case 'B':
-            grades.b.percentage = (grades.b.counter/numOfStudents)*100;
-            break;
-     case 'C+':
-            grades.cPlus.percentage = (grades.cPlus.counter/numOfStudents)*100;
-            break;
-     case 'C':
-            grades.c.percentage = (grades.c.counter/numOfStudents)*100;
-            break;
-     case 'D+':
-            grades.dPlus.percentage = (grades.dPlus.counter/numOfStudents)*100;
-            break;
-     case 'D':
-            grades.d.percentage = (grades.d.counter/numOfStudents)*100;
-            break;
-      default:
-            break;
-    }
-}
 
-let withdrawnPercentage = (withdrawn/numOfStudents)*100;
-grades.f.percentage = (grades.f.counter/numOfStudents)*100;
-let failPercentage = grades.f.percentage;
-let fail= grades.f.counter;
-let pass=numOfStudents - fail;
-let passPercentage = 100 - failPercentage;
+  grades.aPlus.percentage = Math.floor((grades.aPlus.counter/numOfStudents)*10000) /100 ;
+  grades.a.percentage = Math.floor((grades.a.counter/numOfStudents)*10000)/100;
+  grades.bPlus.percentage = Math.floor((grades.bPlus.counter/numOfStudents)*10000)/100;
+  grades.b.percentage = Math.floor((grades.b.counter/numOfStudents)*10000)/100;
+  grades.cPlus.percentage = Math.floor((grades.cPlus.counter/numOfStudents)*10000)/100;
+  grades.c.percentage = Math.floor((grades.c.counter/numOfStudents)*10000)/100;
+  grades.dPlus.percentage = Math.floor((grades.dPlus.counter/numOfStudents)*10000)/100;
+  grades.d.percentage = Math.floor((grades.d.counter/numOfStudents)*10000)/100;
+  grades.w.percentage = Math.floor((grades.w.counter/numOfStudents)*10000)/100;
+  grades.nf.percentage = Math.floor((grades.nf.counter/numOfStudents)*10000)/100;
+  grades.np.percentage = Math.floor((grades.np.counter/numOfStudents)*10000)/100;
+
+grades.nf.percentage = (grades.nf.counter/numOfStudents)*100;
+let failPercentage = grades.nf.percentage + grades.np.percentage;
+let fail= grades.nf.counter + grades.np.counter;
+let pass=numOfStudents - fail - grades.w.counter - grades.np.counter;
+let passPercentage = 100 - failPercentage - grades.w.percentage - grades.np.percentage;
 console.log(`number of students: ${studentGrades.length}`);
 console.log(`Passed: ${pass} students, ${passPercentage}%. Failed: ${fail} students, ${failPercentage}%`);
-console.log(`withdrawn ${withdrawn} students, ${withdrawnPercentage}%`);
-console.log(`number of A+: ${grades.aPlus.counter}, percentage: ${grades.aPlus.percentage}`);
-console.log(`number of A's: ${grades.a.counter}, percentage: ${grades.a.percentage}`);
-console.log(`number of B+: ${grades.bPlus.counter}, percentage: ${grades.bPlus.percentage}`);
-console.log(`number of B's: ${grades.b.counter}, percentage: ${grades.b.percentage}`);
-console.log(`number of C+: ${grades.cPlus.counter}, percentage: ${grades.cPlus.percentage}`);
-console.log(`number of C: ${grades.c.counter}, percentage: ${grades.c.percentage}`);
-console.log(`number of D+: ${grades.dPlus.counter}, percentage: ${grades.dPlus.percentage}`);
-console.log(`number of D: ${grades.d.counter}, percentage: ${grades.d.percentage}`);
-console.log(`number of F (includes NF/NP): ${grades.f.counter}, percentage: ${grades.f.percentage}`);
+console.log(`withdrawn ${grades.w.counter} students, ${grades.w.percentage}%`);
+console.log(`number of A+: ${grades.aPlus.counter}, percentage: ${grades.aPlus.percentage}%`);
+console.log(`number of A's: ${grades.a.counter}, percentage: ${grades.a.percentage}%`);
+console.log(`number of B+: ${grades.bPlus.counter}, percentage: ${grades.bPlus.percentage}%`);
+console.log(`number of B's: ${grades.b.counter}, percentage: ${grades.b.percentage}%`);
+console.log(`number of C+: ${grades.cPlus.counter}, percentage: ${grades.cPlus.percentage}%`);
+console.log(`number of C: ${grades.c.counter}, percentage: ${grades.c.percentage}%`);
+console.log(`number of D+: ${grades.dPlus.counter}, percentage: ${grades.dPlus.percentage}%`);
+console.log(`number of D: ${grades.d.counter}, percentage: ${grades.d.percentage}%`);
+console.log(`number of NF: ${grades.nf.counter}, percentage: ${grades.nf.percentage}%`);
+console.log(`number of NP: ${grades.np.counter}, percentage: ${grades.np.percentage}%`);
 
 }
+
 </textarea>
   </body>
 </html>

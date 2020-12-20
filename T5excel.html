@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>T5 form parse</title>
+    <style>
+      .marginLeft {
+        margin-left: 2rem;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <script src="T5parse.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+    <h2 class="marginLeft">T5 Form code parse</h2>
+     <p class="marginLeft" style="width:1000px">Select grade sheet file for your class and click parse button.</p>
+     <p class="marginLeft" style="width:1000px">Note: DN or prohibited are listed as Denied Entry, withdrawn students do not count as passed or factor into those calculations.</p>
+
+
+    <label class="marginLeft" for="myfile">Select an Excel file:</label>
+    <input class="marginLeft" type="file" id="myfile" name="myfile">
+
+    <button style="margin-left:50px" onclick="parseFile()" >parse file</button>
+
+     <textarea style="position:absolute;top: 200px; left: 50px;color:lightgreen; background-color: black"
+        id="text" rows="30" cols="100"></textarea>
+
+   
+  </body>
+</html>
