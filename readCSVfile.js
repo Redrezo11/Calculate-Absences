@@ -169,17 +169,34 @@ for (student of studentList) {
 console.log('---------------------------------');
 console.log('');
 console.log('Late list:')
+
+
 if (lateList.length==0) {
     console.log("None");
 } else {
+    let superLateList = [];
     if (lateList.length>1) {
          lateList.sort( (a,b) =>  a.serialNumber > b.serialNumber ? 1: -1);
     }
     for (student of lateList) {
-         console.log('#:' + student.serialNumber + ', id: ' + student.id + ', join time: ' + student.joinTime + ' MST');
+         if (student.joinTime > superLateTime) {
+            superLateList.push(student);
+         } else {
+             console.log('#:' + student.serialNumber + ', id: ' + student.id + ', join time: ' + student.joinTime + ' MST');
+         }
     }
-}
+    if (superLateList.length>0) {
+        if (lateList.length==0) {
+            console.log('None');
+        }
+        console.log('');
+        console.log('Super Late list (should be marked absent):');
+        for (student of superLateList) {
+            console.log('#:' + student.serialNumber + ', id: ' + student.id + ', join time: ' + student.joinTime + ' MST');
+        }
+    }
 
+}
 
 
 if (absentTimeShort.length>0) {
