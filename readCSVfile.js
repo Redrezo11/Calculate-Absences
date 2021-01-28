@@ -6,6 +6,7 @@ const baseCode = (output) =>
 //mutable values: classNumber, startTime, absentSessionTime;
 const startTime = "${startTime}"; //start time assumed to be military time and starting at 00;
 const lateTime = createLateTime(startTime); //20 minutes added
+const superLateTime = createSuperLateTime(startTime);
 const absentSessionTime ="${absentSessionTime}"; //45 minutes for 3 hours.
 let documents = document.querySelectorAll("span");
 let objectList = []; //contains   { tr: null, spanId: , spanElement};
@@ -13,6 +14,7 @@ let spanList = [];
 let absentTimeShort = [];
 let absentSecondSession = [];
 let lateList = [];
+
 // {id: , serialNumber: },
 const studentList = ${output}
 
@@ -28,6 +30,12 @@ function createLateTime(time) {
     //add twenty minutes;
     let newTime = time.split(":");
     return newTime[0] + ":" + "20";
+};
+
+function createSuperLateTime(time) {
+    //add twenty minutes;
+    let newTime = time.split(":");
+    return newTime[0] + ":" + "50";
 };
 
 function isNormalInteger(str) {
