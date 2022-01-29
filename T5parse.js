@@ -118,6 +118,7 @@ function parseFile() {
   }
 
   grades.aPlus.percentage = Math.floor((grades.aPlus.counter/numOfStudents)*10000) /100 ;
+  grades.aPlus.percentage.toFixed(1);
   grades.a.percentage = Math.floor((grades.a.counter/numOfStudents)*10000)/100;
   grades.bPlus.percentage = Math.floor((grades.bPlus.counter/numOfStudents)*10000)/100;
   grades.b.percentage = Math.floor((grades.b.counter/numOfStudents)*10000)/100;

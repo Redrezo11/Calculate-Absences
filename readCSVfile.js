@@ -116,11 +116,22 @@ console.log(date);
              if(found===undefined||found===null) {
                  //need to push the span element as well as the Found ID number to parse later.
                  let parentEl = document.parentElement.parentElement;
-                 if (foundString.length>=9) {
-                     spanList.push(foundString);
-                     objectList.push({tr: parentEl, spanId: foundString, joinTime: convertToMilitary(parseHtmlTime(parentEl.childNodes[8].innerHTML)),
-                     totalTime: parentEl.childNodes[12].childNodes[7].innerHTML,
-                     lastLeave: convertToMilitary(parentEl.childNodes[10].outerText) });
+
+                 //found string can become undefined
+                 if (foundString!==undefined) {
+                     if (foundString.length>=9) {
+                         spanList.push(foundString);
+                         objectList.push({tr: parentEl, spanId: foundString, joinTime: convertToMilitary(parseHtmlTime(parentEl.childNodes[8].innerHTML)),
+                         totalTime: parentEl.childNodes[12].childNodes[7].innerHTML,
+                         lastLeave: convertToMilitary(parentEl.childNodes[10].outerText) });
+                     }
+   
+                 }
+                 //if (foundString.length>=9) {
+                 //    spanList.push(foundString);
+                 //    objectList.push({tr: parentEl, spanId: foundString, joinTime: convertToMilitary(parseHtmlTime(parentEl.childNodes[8].innerHTML)),
+                 //    totalTime: parentEl.childNodes[12].childNodes[7].innerHTML,
+                 //    lastLeave: convertToMilitary(parentEl.childNodes[10].outerText) });
                  }
 
              }
